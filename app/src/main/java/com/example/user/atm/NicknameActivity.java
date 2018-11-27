@@ -20,6 +20,7 @@ public class NicknameActivity extends BaseActivity {
                 .edit()
                 .putString("NICKNAME", nickname)
                 .apply();
+//        user.setNickname(nickname);
         Intent age = new Intent(this,AgeActivity.class);
         startActivity(age);
     }

@@ -20,6 +20,7 @@ public class AgeActivity extends BaseActivity {
                 .edit()
                 .putInt("AGE", age)
                 .apply();
+//        user.setAge(age);
         Intent gender = new Intent(this, GenderActivity.class);
         startActivity(gender);
     }

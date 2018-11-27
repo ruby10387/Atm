@@ -18,10 +18,12 @@ public class User {
     }
 
     public String getId() {
+
         return id;
     }
 
     public void setId(String id) {
+
         this.id = id;
     }
 
@@ -65,7 +67,7 @@ public class User {
     }
 
     public boolean isValid() {
-        valid = nickname != null && age != 0 && gender != 0;
+        valid = getNickname() != null && getAge() != 0 && getGender() != 0;
         return valid;
     }
 }
