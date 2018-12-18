@@ -7,24 +7,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class AgeActivity extends BaseActivity {
-int [] numbers = {19,20,21,22};
+    int [] numbers = {18,19,20,21,22,23,24,25};
+    private EditText edAge;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_age);
+        edAge = findViewById(R.id.ed_age);
         RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new AgeAdapter());
     }
     public void next(View view) {
-        EditText edAge = findViewById(R.id.ed_age);
         int age = Integer.parseInt(edAge.getText().toString());
         getSharedPreferences("user", MODE_PRIVATE)
                 .edit()
@@ -45,12 +48,20 @@ int [] numbers = {19,20,21,22};
             return new AgeHolder(view);
         }
 
+//        匿名類別要存取區域變數需要改成final
         @Override
-        public void onBindViewHolder(@NonNull AgeHolder holder, int position) {
+        public void onBindViewHolder(@NonNull AgeHolder holder, final int position) {
             holder.ageText.setText(numbers[position] + "");
             if(numbers[position] % 2 == 1) {
                 holder.ageText.setTextColor(Color.BLUE);
             }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("AgeActivety","onClick :" + numbers[position]);
+                    edAge.setText(numbers[position] + "");
+                }
+            });
         }
 
         @Override
